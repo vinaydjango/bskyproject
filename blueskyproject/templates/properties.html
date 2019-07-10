@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block block_content %}
+{% load humanize %}
+{%block title_block%} Properties {%endblock%}
+
+<div class="properties" style='margin-top:100px;'>
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="section_title" style='margin-top:20px;margin-bottom:20px;'>{{ count }} PROPERTIES</div>
+				</div>
+			</div>
+			<div class="row properties_row" style='margin-bottom:10px;'>
+				{%for listdata in list%}
+
+				<!-- Property -->
+				<div class="col-md-4 property_col">
+					<div class="property">
+						<div class="property_image">
+							<a href="/property/{{listdata.id}}"><img src="{{listdata.photo_main.url}}" width='350px' height='300px' alt=""></a>
+						</div>
+						<div class="property_body text-center">
+							<div class="property_location">{{listdata.city}}</div>
+							<div class="property_title"><a href="/property/{{listdata.id}}">{{listdata.title}}</a></div>
+							<div class="property_price">${{listdata.price | intcomma}}</div>
+						</div>
+
+					</div>
+				</div>
+
+
+				{%endfor%}
+
+</div>
+
+{%if list.has_other_pages%}
+<nav aria-label="Page navigation example" style="margin-left:400px; margin-bottom:20px;">
+  <ul class="pagination">
+  {% if list.has_previous %}
+      <li class="page-item"><a href="?page={{list.previus_page_number}}">&laquo;</a></li>
+  {% endif %}
+	{%for i in list.paginator.page_range%}
+	{%if list.number == i %}
+    <li class="page-item active"><a class="page-link" href="#">{{i}}</a></li>
+   {%else%}
+	 <li class="page-item"><a href="?page={{i}}"  class="page-link" >{{i}}</a></li>
+{%endif%}
+{%endfor%}
+{% if list.has_next %}
+    <li class="page-item"><a class="page-link" href="?page={{ list.next_page_number }}">&raquo</a></li>
+	{% endif %}
+  </ul>
+</nav>
+{%endif%}
+
+  </div>
+  </div>
+{% endblock%}

@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block block_content %}
+{%block title_block%} About us {%endblock%}
+
+	<div class="about" style='margin-top:100px;'>
+		<div class="container">
+			<div class="row">
+
+				<!-- About Content -->
+				<div class="col-lg-6">
+					<div class="about_content" style='margin-top:20px;'>
+						<div class="section_title" style='margin-bottom:10px;'> About us</div>
+						<div class="about_text">
+							<p>Etiam nec odio vestibulum est mattis effic iturut magna. Pellentesque sit amet tellus blandit. Etiam nec odio vestibulum est mattis effic iturut magna. Pellentesque sit am et tellus blandit. Etiam nec odio vestibul. Donec in tempus leo. Aenean ultricies mauris sed quam lacinia lobortis. Cras ut vestibulum enim, in gravida nulla. Curabitur ornare nisl at sagittis cursus. Sed mattis, eros non vulputate luctus, erat dui dapibus augue, eu fringilla tortor ante id mi. Sed a enim libero. Vestibulum pharetra aliquam convallis. </p>
+						</div>
+					</div>
+				</div>
+
+				<!-- About Image -->
+				<div class="col-lg-6" style='margin-top:20px;'>
+					<div class="about_image"><img src="{%static 'images/about_image.jpg' %}" alt=""></div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	<!-- Realtors -->
+
+	<div class="realtors" style='margin-top:20px;margin-bottom:20px;'>
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="section_title" style='margin-bottom:20px;'>The Realtors</div>
+				</div>
+			</div>
+			<div class="row realtors_row">
+ {%for data in list%}
+				<!-- Realtor -->
+				<div class="col-md-3">
+					<div class="realtor_outer">
+						<div class="realtor">
+							<div class="realtor_image"><img src="{{data.photo.url}}" width='250px' height="250px" alt=""></div>
+							<div class="realtor_body" style='text-align:center;'>
+								<div class="realtor_title"><h3>{{data.name}}</h3></div>
+								<div class="">
+									+ 91{{data.phone}}
+								</div>
+							</div>
+
+						</div>
+						<div class="realtor_link_background_container">
+							<div><div class="realtor_link_background"></div></div>
+						</div>
+					</div>
+				</div>
+{%endfor%}
+
+			</div>
+		</div>
+	</div>
+
+	<!-- Newsletter -->
+
+	<div class="newsletter" style='margin-top:20px;'>
+		<div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="{%static 'images/newsletter.jpg' %}" data-speed="0.8"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="newsletter_content d-flex flex-lg-row flex-column align-items-start justify-content-start">
+						<div class="newsletter_title_container">
+							<div class="newsletter_title">Are you buying or selling?</div>
+							<div class="newsletter_subtitle">Search your dream home</div>
+						</div>
+						<div class="newsletter_form_container">
+							<form action="#" class="newsletter_form">
+								<input type="email" class="newsletter_input" placeholder="Your e-mail address" required="required">
+								<button class="newsletter_button">subscribe now</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

@@ -1,0 +1,355 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load humanize %}
+{% block block_content %}
+{%block title_block%} {{list.title}} {%endblock%}
+<style>
+body {font-family: Arial, Helvetica, sans-serif;}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 0;
+  border: 1px solid #888;
+  width: 40%;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+  from {top:-300px; opacity:0}
+  to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+  from {top:-300px; opacity:0}
+  to {top:0; opacity:1}
+}
+
+/* The Close Button */
+.close {
+  color: white;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-header {
+  padding: 2px;
+  background-color: #5cb85c;
+  color: white;
+}
+
+.modal-body {padding: 2px 16px;}
+
+.modal-footer {
+  padding: 2px 16px;
+  background-color: #5cb85c;
+  color: white;
+}
+</style>
+
+<div class="intro" style='margin-top:100px;'>
+		<div class="container">
+			<div class="row">
+     <span style='margin-left:200px;'>{%include 'accounts/alert.html'%}</span>
+				<div class="col">
+					<div class="intro_content d-flex flex-lg-row flex-column align-items-start justify-content-start">
+						<div class="intro_title_container" style='margin-top:10px;'>
+							<div class="intro_title"><h3>{{list.title}}</h3></div>
+							<div class="intro_price" style='margin-bottom:10px;'><i class='btn btn-primary'>${{list.price | intcomma}}</i></div>
+
+               <img src="{{list.photo_main.url}}" alt="" width="1150px">
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="intro_slider_container">
+
+			<!-- Intro Slider -->
+			<div class="owl-carousel owl-theme intro_slider">
+				<!-- Slide -->
+				<div class="owl-item"><img src="{%static 'images/intro_1.jpg'%}" alt=""></div>
+				<!-- Slide -->
+				<div class="owl-item"><img src="{%static 'images/intro_1.jpg'%}" alt=""></div>
+				<!-- Slide -->
+				<div class="owl-item"><img src="{%static 'images/intro_1.jpg'%}" alt=""></div>
+			</div>
+
+			<!-- Intro Slider Nav -->
+			<div class="intro_slider_nav_container">
+				<div class="container">
+					<div class="row">
+						<div class="col">
+							<div class="intro_slider_nav_content d-flex flex-row align-items-start justify-content-end">
+								<div class="intro_slider_nav intro_slider_prev"><i class="fa fa-chevron-left" aria-hidden="true"></i></div>
+								<div class="intro_slider_nav intro_slider_next"><i class="fa fa-chevron-right" aria-hidden="true"></i></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<div class="property">
+		<div class="container">
+			<div class="row">
+
+				<!-- Sidebar -->
+
+				<div class="col-lg-4">
+					<div class="sidebar">
+
+
+						<!-- Realtor -->
+						<div class="sidebar_realtor">
+							<h4 style='text-align:center;'>Realtor</h4>
+							<div class="sidebar_realtor_image"><img src="{{list.realtor.photo.url}}" alt=""></div>
+							<div class="sidebar_realtor_body text-center">
+								<div class="sidebar_realtor_title"><a href="#">{{list.realtor.name}}</a></div>
+								<div class="sidebar_realtor_phone"><span>call us: </span>8814751125</div>
+								<div class="realtor_link btn btn-primary" id='enquiry' style='margin-bottom:10px;'>Make An Enquiry</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+
+				<!-- Property Content -->
+				<div class="col-lg-7 offset-lg-1">
+					<div class="property_content">
+						<div class="property_icons">
+							<div class="property_title"><h3>Extra Facilities</h3></div>
+							<div class="property_text property_text_1">
+								<p>Donec ullamcorper nulla non metus auctor fringi lla. Curabitur blandit tempus porttitor.</p>
+							</div>
+							<div class="property_rooms d-flex flex-sm-row flex-column align-items-start justify-content-start">
+
+								<!-- Property Room Item -->
+								<div class="property_room">
+									<div class="property_room_title">Bedrooms</div>
+									<div class="property_room_content d-flex flex-row align-items-center justify-content-start">
+										<div class="room_icon"><img src="{%static 'images/room_1.png' %}" alt=""></div>
+										<div class="room_num">{{list.bedrooms}}</div>
+									</div>
+								</div>
+
+								<!-- Property Room Item -->
+								<div class="property_room">
+									<div class="property_room_title">Bathrooms</div>
+									<div class="property_room_content d-flex flex-row align-items-center justify-content-start">
+										<div class="room_icon"><img src="{%static 'images/room_2.png' %}" alt=""></div>
+										<div class="room_num">{{list.bathrooms}}</div>
+									</div>
+								</div>
+
+								<!-- Property Room Item -->
+								<div class="property_room">
+									<div class="property_room_title">Area</div>
+									<div class="property_room_content d-flex flex-row align-items-center justify-content-start">
+										<div class="room_icon"><img src="{%static 'images/room_3.png' %}" alt=""></div>
+										<div class="room_num">{{list.sqft}}</div>
+									</div>
+								</div>
+
+								<!-- Property Room Item -->
+								<div class="property_room">
+									<div class="property_room_title">Patio</div>
+									<div class="property_room_content d-flex flex-row align-items-center justify-content-start">
+										<div class="room_icon"><img src="{%static 'images/room_4.png' %}" alt=""></div>
+										<div class="room_num">1</div>
+									</div>
+								</div>
+
+								<!-- Property Room Item -->
+								<div class="property_room">
+									<div class="property_room_title">Garage</div>
+									<div class="property_room_content d-flex flex-row align-items-center justify-content-start">
+										<div class="room_icon"><img src="{%static 'images/room_5.png' %}" alt=""></div>
+										<div class="room_num">{{list.garage}}</div>
+									</div>
+								</div>
+
+							</div>
+						</div>
+
+						<!-- Description -->
+
+						<div class="property_description">
+							<div class="property_title"><h3>Description<h3></div>
+							<div class="property_text property_text_2">
+								<p>{{list.description}}</p>
+							</div>
+						</div>
+
+						<!-- Additional Details -->
+
+						<div class="additional_details">
+							<div class="property_title"><h3>Additional Details</h3></div>
+							<div class="details_container">
+								<ul>
+									<li><span>bedroom features: </span>Main Floor Master Bedroom, Walk-In Closet</li>
+									<li><span>dining area: </span>Breakfast Counter/Bar, Living/Dining Combo</li>
+									<li><span>doors & windows: </span>Bay Window</li>
+									<li><span>entry location: </span>Mid Level</li>
+									<li><span>floors: </span>Raised Foundation, Vinyl Tile, Wall-to-Wall Carpet, Wood</li>
+								</ul>
+							</div>
+						</div>
+
+						<!-- Property On Map -->
+
+						<div class="property_map">
+							<div class="property_title">Property on map</div>
+							<div class="property_map_container">
+
+								<!-- Google Map -->
+								<div id="google_map" class="google_map">
+									<div class="map_container">
+										<div id="map"></div>
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Newsletter -->
+
+	<div class="newsletter">
+		<div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="{%static 'images/newsletter.jpg'%}" data-speed="0.8"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="newsletter_content d-flex flex-lg-row flex-column align-items-start justify-content-start">
+						<div class="newsletter_title_container">
+							<div class="newsletter_title">Are you buying or selling?</div>
+							<div class="newsletter_subtitle">Search your dream home</div>
+						</div>
+						<div class="newsletter_form_container">
+							<form action="#" class="newsletter_form">
+								<input type="email" class="newsletter_input" placeholder="Your e-mail address" required="required">
+								<button class="newsletter_button">subscribe now</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <div class="modal-header" style='text-align:left;'>
+			<h3> Make An Enquiry</h3>
+      <span class="close">&times;</span>
+
+    </div>
+    <div class="modal-body">
+			<div class="col-md-8">
+ <form class="" action="{% url 'contact' %}" method="post">
+	 {% csrf_token %}
+	 {%if user.is_authenticated%}
+	 <input type="hidden" name="user_id" value="{{user.id}}">
+	 {%else%}
+	 <input type="hidden" name="user_id" value="0">
+	 {%endif%}
+	 <input type="hidden" name="realter_email" value="{{list.realtor.email}}">
+	 <input type="hidden" name="list_id" value="{{list.id}}">
+
+	 <div class="form-group">
+	 	<label for="name" class='col-form-label'>Property :</label>
+		<input type="text" name="listing" class='form-control'  value="{{list.title}}">
+	 </div>
+	<div class="form-group">
+	 	<label for="name" class='col-form-label'>Name :</label>
+		<input type="text" {% if user.is_authenticated %} value="{{user.first_name}} {{user.last_name}} " {%endif%} name="name" class='form-control'>
+  </div>
+
+	<div class="form-group">
+	 	<label for="email" class='col-form-label'>Email :</label>
+		<input type="text" {% if user.is_authenticated %} value="{{user.email}}" {%endif%}  name="email" class='form-control' value="">
+  </div>
+
+	<div class="form-group">
+	 	<label for="name" class='col-form-label'>Phone :</label>
+		<input type="text" name="phone" class='form-control' value="">
+  </div>
+
+	<div class="form-group">
+	 	<label for="name" class='col-form-label'>Message :</label>
+		<textarea name="message"  cols="65" rows="5"></textarea>
+  </div>
+		<input type="submit" value="Send" class="btn btn-primary">
+ </form>
+			</div>
+    </div>
+
+  </div>
+
+</div>
+<script>
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("enquiry");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
+
+  {%endblock%}

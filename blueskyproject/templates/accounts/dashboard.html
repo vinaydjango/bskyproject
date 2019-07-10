@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block block_content %}
+{%block title_block%} Dashboard {%endblock%}
+<div class="container" style='margin-top:100px;'>
+  <h3>Dashboard</h3>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Property</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+
+      {% for con in user_con%}
+      <tr>
+        <td>{{con.id}}</td>
+        <td>{{con.listing}}</td>
+        <td><a href="/property/{{con.listing_id}}">view listing</a></td>
+      </tr>
+      {%endfor%}
+    </tbody>
+  </table>
+</div>
+{%endblock%}
